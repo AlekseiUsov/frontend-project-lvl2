@@ -16,8 +16,9 @@ const parseFile = (filepath) => {
 const genDiff = (filepath1, filepath2) => {
     const file1 = parseFile(filepath1);
     const file2 = parseFile(filepath2);
+    const commomObject = { ...file2, ...file1 };
 
-    const lines = _.sortBy(Object.entries({ ...file2, ...file1 }))
+    const lines = _.sortBy(Object.entries(commomObject))
         .reduce((acc, [key, value]) => {
             if (_.has(file1, key) && _.has(file2, key) && file1[key] === file2[key]) {
                 acc[`  ${key}`] = value;
@@ -30,7 +31,7 @@ const genDiff = (filepath1, filepath2) => {
                 acc[`${operators.plus} ${key}`] = value;
             }
             return acc;
-        }, {})
+        }, {});
     const result = JSON.stringify(lines, null, 2);
     return result.replace(/"/g, '').replace(/,/g, '');
 }
