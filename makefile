@@ -1,5 +1,8 @@
 install:
 	npm ci
 
-make lint:
+lint:
 	npx eslint .
+
+publish:
+	npm publish --dry-run
