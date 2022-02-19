@@ -27,7 +27,7 @@ const genDiff = (filepath1, filepath2) => {
       }
       return acc;
     }, {});
-  const result = JSON.stringify(lines, null, 2);
+  const result = JSON.stringify(lines, '/n', 2);
   return result.replace(/"/g, '').replace(/,/g, '');
 };
 
